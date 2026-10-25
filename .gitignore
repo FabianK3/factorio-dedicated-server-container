@@ -1,0 +1,7 @@
+# Artifacts
+/build
+/publish
+# Local config
+/config
+# Local volumes
+/volumes
