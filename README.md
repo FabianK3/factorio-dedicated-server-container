@@ -81,7 +81,7 @@ See the [dedicated server guide](https://wiki.factorio.com/Multiplayer#Dedicated
 
 To use an existing save, place its zip file in `volumes/saves` and set `SAVEGAME_NAME` in `compose.yaml` to its filename without `.zip`.
 
-The whitelist and admin list use JSON arrays of usernames, for example `["PlayerName"]`.
+The whitelist and admin list use JSON arrays of usernames, for example `["PlayerName1", "PlayerName2"]`.
 
 ## More
 

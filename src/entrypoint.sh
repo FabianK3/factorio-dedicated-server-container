@@ -22,17 +22,19 @@ fi
 if [ ! -f ./config/server-adminlist.json ]; then
 	printf '[]\n' > ./config/server-adminlist.json
 fi
+# Create whitelist config if missing
+if [ ! -f ./config/server-whitelist.json ]; then
+	printf '[]\n' > ./config/server-whitelist.json
+fi
 
+# Base args
 set -- --start-server "$save" \
 	--server-settings ./config/server-settings.json \
 	--mod-directory ./mods \
 	--server-adminlist ./config/server-adminlist.json
 
-# Create and attach whitelist config file if enabled
+# Attach whitelist config file if enabled
 if [ "$USE_WHITELIST" = "true" ]; then
-	if [ ! -f ./config/server-whitelist.json ]; then
-		printf '[]\n' > ./config/server-whitelist.json
-	fi
 	set -- "$@" --server-whitelist ./config/server-whitelist.json --use-server-whitelist=true
 fi
 
