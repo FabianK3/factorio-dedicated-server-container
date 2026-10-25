@@ -62,3 +62,9 @@ New saves use `map-gen-settings.json` and `map-settings.json`; changing either f
 To use an existing save, place its zip file in `volumes/saves` and set `name` in `compose.yaml` to its filename without `.zip`.
 
 The whitelist and admin list use JSON arrays of usernames, for example `["PlayerName"]`.
+
+## More
+
+All rights for components used in this project go to their respective owner.
+
+For information on how to administrate the Factorio server itself, see the official wiki.
