@@ -10,4 +10,5 @@ services:
       #RCON_PW: "" # RCON password - If null or empty, disabled
     volumes:
       - ./volumes/config:/opt/factorio/config
+      - ./volumes/mods:/opt/factorio/mods
       - ./volumes/saves:/opt/factorio/saves

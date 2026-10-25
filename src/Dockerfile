@@ -7,9 +7,10 @@ COPY build/factorio-headless_linux.tar.xz /tmp/factorio.tar.xz
 RUN mkdir -p /opt && tar -xJf /tmp/factorio.tar.xz -C /opt && rm /tmp/factorio.tar.xz
 
 COPY build/server-settings.json build/map-settings.json build/map-gen-settings.json /opt/factorio/default-config/
+COPY src/mod-list.json /opt/factorio/default-mods/mod-list.json
 COPY src/entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN useradd --system --no-create-home factorio && \
-	mkdir -p /opt/factorio/config /opt/factorio/saves && \
+	mkdir -p /opt/factorio/config /opt/factorio/mods /opt/factorio/saves && \
 	chown -R factorio:factorio /opt/factorio
 
 USER factorio
@@ -27,5 +28,5 @@ EXPOSE 34197/udp
 # RCON
 EXPOSE 27015/tcp
 
-VOLUME ["/opt/factorio/config", "/opt/factorio/saves"]
+VOLUME ["/opt/factorio/config", "/opt/factorio/mods", "/opt/factorio/saves"]
 ENTRYPOINT ["/bin/sh", "/usr/local/bin/entrypoint.sh"]

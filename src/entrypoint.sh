@@ -7,9 +7,14 @@ for file in ./default-config/*.json; do
 	fi
 done
 
+if [ ! -e ./mods/mod-list.json ]; then
+	cp ./default-mods/mod-list.json ./mods/
+fi
+
 save="./saves/${name}.zip"
 if [ ! -f "$save" ]; then
 	./bin/x64/factorio --create "$save" \
+		--mod-directory ./mods \
 		--map-gen-settings ./config/map-gen-settings.json \
 		--map-settings ./config/map-settings.json
 fi
@@ -19,6 +24,7 @@ if [ ! -f ./config/server-adminlist.json ]; then
 fi
 
 set -- --start-server "$save" \
+	--mod-directory ./mods \
 	--server-settings ./config/server-settings.json \
 	--server-adminlist ./config/server-adminlist.json
 if [ "$USE_WHITELIST" = "true" ]; then
