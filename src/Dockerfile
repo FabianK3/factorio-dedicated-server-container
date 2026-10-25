@@ -9,7 +9,7 @@ RUN mkdir -p /opt && tar -xJf /tmp/factorio.tar.xz -C /opt && rm /tmp/factorio.t
 COPY build/server-settings.json build/map-settings.json build/map-gen-settings.json /opt/factorio/default-config/
 COPY src/mod-list.json /opt/factorio/default-mods/mod-list.json
 COPY src/entrypoint.sh /usr/local/bin/entrypoint.sh
-RUN useradd --system --no-create-home factorio && \
+RUN useradd --uid 1000 --user-group --no-create-home factorio && \
 	mkdir -p /opt/factorio/config /opt/factorio/mods /opt/factorio/saves && \
 	chown -R factorio:factorio /opt/factorio
 

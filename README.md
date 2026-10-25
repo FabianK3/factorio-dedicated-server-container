@@ -31,13 +31,13 @@ The build step tags the image as `factorio-dedicated-server:<version>` and `fact
 
 The publish step writes `publish/factorio-dedicated-server-latest.tar`; it does not push to a registry or transfer the image.
 
-The container runs as the non-root `factorio` user. **All three bind-mounted directories must be writable by that user.** Check the image's numeric UID/GID with:
+The container runs as the non-root `factorio` user with UID/GID `1000:1000`. **All three bind-mounted directories must be writable by that user.** Check the image's numeric UID/GID with:
 
 ```sh
 docker run --rm --entrypoint id factorio-dedicated-server:latest
 ```
 
-Set ownership or host filesystem permissions on `volumes/config`, `volumes/mods`, and `volumes/saves` accordingly before `docker compose up`. Docker-created bind directories may be owned by root. Compose uses the `latest` tag, so build it locally or load the exported archive first.
+Set ownership or host filesystem permissions on `volumes/config`, `volumes/mods`, and `volumes/saves` accordingly before `docker compose up`. On hosts where your user has UID/GID `1000:1000`, directories created with `mkdir -p` are writable without further changes. Docker-created bind directories may be owned by root. Compose uses the `latest` tag, so build it locally or load the exported archive first.
 
 ## Configuration
 
