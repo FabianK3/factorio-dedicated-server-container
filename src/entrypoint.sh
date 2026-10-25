@@ -1,34 +1,42 @@
 #!/bin/sh
 set -eu
 
+# Deploy default configs if missing
 for file in ./default-config/*.json; do
 	if [ ! -e "./config/${file##*/}" ]; then
 		cp "$file" ./config/
 	fi
 done
 
-save="./saves/${name}.zip"
+save="./saves/${SAVEGAME_NAME}.zip"
+
+# Create new save if none is found under specified name
 if [ ! -f "$save" ]; then
 	./bin/x64/factorio --create "$save" \
-		--mod-directory ./mods \
 		--map-gen-settings ./config/map-gen-settings.json \
-		--map-settings ./config/map-settings.json
+		--map-settings ./config/map-settings.json \
+		--mod-directory ./mods
 fi
 
+# Create admin config file if missing
 if [ ! -f ./config/server-adminlist.json ]; then
 	printf '[]\n' > ./config/server-adminlist.json
 fi
 
 set -- --start-server "$save" \
-	--mod-directory ./mods \
 	--server-settings ./config/server-settings.json \
+	--mod-directory ./mods \
 	--server-adminlist ./config/server-adminlist.json
+
+# Create and attach whitelist config file if enabled
 if [ "$USE_WHITELIST" = "true" ]; then
 	if [ ! -f ./config/server-whitelist.json ]; then
 		printf '[]\n' > ./config/server-whitelist.json
 	fi
 	set -- "$@" --server-whitelist ./config/server-whitelist.json --use-server-whitelist=true
 fi
+
+# Set RCON password if given
 if [ -n "${RCON_PW:-}" ]; then
 	set -- "$@" --rcon-password "$RCON_PW"
 fi

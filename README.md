@@ -53,7 +53,7 @@ The downloaded [server settings are examples](https://github.com/wube/factorio-d
 
 | Setting | Default | Effect |
 | --- | --- | --- |
-| `name` | `server` | Uses `volumes/saves/<name>.zip`; creates it if missing, otherwise loads it. |
+| `SAVEGAME_NAME` | `server` | Uses `volumes/saves/<SAVEGAME_NAME>.zip`; creates it if missing, otherwise loads it. |
 | `USE_WHITELIST` | `false` | When `true`, creates `server-whitelist.json` as `[]` if absent and enforces it. Add allowed Factorio usernames before players connect. |
 | `RCON_PW` | empty | Enables RCON when non-empty. Uncomment and set this variable in `compose.yaml`; also uncomment the TCP 27015 port mapping if remote access is needed. |
 
@@ -79,7 +79,7 @@ Replace `server.zip` with your save filename. Downloading missing mods during sy
 
 See the [dedicated server guide](https://wiki.factorio.com/Multiplayer#Dedicated/Headless_server), [command-line options](https://wiki.factorio.com/Command_line_parameters), and [Factorio staff guidance on Space Age and syncing saves](https://forums.factorio.com/viewtopic.php?p=621129#p621129).
 
-To use an existing save, place its zip file in `volumes/saves` and set `name` in `compose.yaml` to its filename without `.zip`.
+To use an existing save, place its zip file in `volumes/saves` and set `SAVEGAME_NAME` in `compose.yaml` to its filename without `.zip`.
 
 The whitelist and admin list use JSON arrays of usernames, for example `["PlayerName"]`.
 

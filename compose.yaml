@@ -5,8 +5,8 @@ services:
       - "34197:34197/udp" # Game
       #- "27015:27015/tcp" # RCON
     environment:
-      name: server # Save name
-      USE_WHITELIST: false # Whitelist usage
+      SAVEGAME_NAME: server # Name of save file (without .zip)
+      USE_WHITELIST: false # Enable whitelist
       #RCON_PW: "" # RCON password - If null or empty, disabled
     volumes:
       - ./volumes/config:/opt/factorio/config

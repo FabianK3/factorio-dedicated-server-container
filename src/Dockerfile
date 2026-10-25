@@ -16,7 +16,7 @@ USER factorio
 WORKDIR /opt/factorio
 
 # Used in save game creation / load
-ENV name=server
+ENV SAVEGAME_NAME=server
 # Used for whitelist startup setting
 ENV USE_WHITELIST=false
 # Used for RCON password - RCON won't be set unless the env var is overwritten
