@@ -41,7 +41,7 @@ Set ownership or host filesystem permissions on `volumes/config`, `volumes/mods`
 
 ## Configuration
 
-On startup, missing `server-settings.json`, `map-settings.json`, and `map-gen-settings.json` are copied from the image into `volumes/config`. A missing `mod-list.json` is copied into `volumes/mods`. Existing files are never overwritten. Factorio can generate this list itself, but the image supplies one so you can choose vanilla or Space Age before the first save is created. The host's `volumes/mods` is the container's `/opt/factorio/mods`.
+On startup, missing `server-settings.json`, `map-settings.json`, and `map-gen-settings.json` are copied from the image into `volumes/config`. Factorio generates `./mods/mod-list.json` when it is missing.
 
 The admin list is created as `server-adminlist.json` containing `[]` if absent. When whitelist enforcement is enabled, a missing `server-whitelist.json` is also created as `[]`.
 
@@ -61,7 +61,13 @@ New saves use `map-gen-settings.json` and `map-settings.json`; changing either f
 
 ## Mods
 
-Edit `volumes/mods/mod-list.json` to enable or disable mods. The default enables `base`, `elevated-rails`, `quality`, and `space-age`, so new saves use Space Age. For a new vanilla save, set `enabled` to `false` for `elevated-rails`, `quality`, and `space-age` **before the save is created**. Place additional compatible mod zip files in `volumes/mods` and add their names to the list with `enabled: true`. The server and all clients need matching game and mod versions.
+With no mod list present, Factorio generates one with its bundled mods enabled, so new saves use Space Age. To start a vanilla save, create `volumes/mods/mod-list.json` **before the first start** with these contents:
+
+```json
+{"mods":[{"name":"base","enabled":true},{"name":"elevated-rails","enabled":false},{"name":"quality","enabled":false},{"name":"recycler","enabled":false},{"name":"space-age","enabled":false}]}
+```
+
+Edit the mod list to enable or disable mods. Place additional compatible mod zip files in `volumes/mods` and add their names to the list with `enabled: true`. The server and all clients need matching game and mod versions.
 
 The mod list affects save creation; changing it does not retroactively turn an existing vanilla save into a Space Age save. For an uploaded save with a different mod set, install its required mods in `volumes/mods` and optionally sync the list once before starting the server:
 

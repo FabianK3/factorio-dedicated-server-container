@@ -7,10 +7,6 @@ for file in ./default-config/*.json; do
 	fi
 done
 
-if [ ! -e ./mods/mod-list.json ]; then
-	cp ./default-mods/mod-list.json ./mods/
-fi
-
 save="./saves/${name}.zip"
 if [ ! -f "$save" ]; then
 	./bin/x64/factorio --create "$save" \
