@@ -57,7 +57,7 @@ The downloaded [server settings are examples](https://github.com/wube/factorio-d
 | `USE_WHITELIST` | `false` | When `true`, creates `server-whitelist.json` as `[]` if absent and enforces it. Add allowed Factorio usernames before players connect. |
 | `RCON_PW` | empty | Enables RCON when non-empty. Uncomment and set this variable in `compose.yaml`; also uncomment the TCP 27015 port mapping if remote access is needed. |
 
-New saves use `map-gen-settings.json` and `map-settings.json`; changing either file does not alter an existing save. To start a new map with different settings, stop the server, back up or rename the old save, edit the settings, and restart.
+New saves use `map-gen-settings.json` and `map-settings.json`; changing either file does not alter an existing save. If you are importing a save from elsewhere, you can skip providing or editing these files: the server loads the map settings from the save instead. The container still copies default files into `volumes/config` if they are missing. To start a new map with different settings, stop the server, back up or rename the old save, edit the settings, and restart.
 
 ## Mods
 
