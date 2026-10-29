@@ -1,6 +1,7 @@
 services:
   factorio:
     image: factorio-dedicated-server:latest
+    container_name: factorio
     ports:
       - "34197:34197/udp" # Game
       #- "27015:27015/tcp" # RCON
